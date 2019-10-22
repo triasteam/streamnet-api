@@ -38,19 +38,22 @@ func (serv *server) GetDagMap(ctx context.Context,gateway string) *common.Common
 			length ++
 		}
 	}
-	returnData := [4]map[string]string{}
-	var index = 0;
-	for k,v := range dagMap {
-		for i := range v{
-			var unit = make(map[string]string)
-			unit["source"] = k[0:6];
-			unit["target"] = v[i][0:6];
-			returnData[index] = unit;
-			index ++;
+	returnData := [length]map[string]string{}
+	if length > 0 {
+		var index = 0;
+		for k,v := range dagMap {
+			for i := range v{
+				var unit = make(map[string]string)
+				unit["source"] = k[0:6];
+				unit["target"] = v[i][0:6];
+				returnData[index] = unit;
+				index ++;
+			}
 		}
+		return createSuccessResponse(returnData);
 	}
-	resp := createSuccessResponse(returnData);
-	return resp;
+
+	return createSuccessResponse(nil);
 }
 
 
