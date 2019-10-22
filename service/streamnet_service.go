@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"io/ioutil"
 	"net/http"
 	"github.com/triasteam/streamnet-api/common"
@@ -51,9 +52,10 @@ func (serv *server) GetDagMap(ctx context.Context,gateway string) *common.Common
 			}
 		}
 		return createSuccessResponse(returnData);
+	} else {
+		return createErrorResponse(errors.New("No data now"))
 	}
 
-	return createSuccessResponse(nil);
 }
 
 
