@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"net/http"
-	st_server "streamnet-api/service"
+	st_server "github.com/triasteam/streamnet-api/service"
 )
 
 var port string
@@ -21,7 +21,8 @@ func GetDagMap(writer http.ResponseWriter, request *http.Request) {
 
 func init() {
 	flag.StringVar(&port, "port", "7001", "server port")
-	flag.StringVar(&GatewayUrl, "gateway", "http://172.31.18.190:9000", "gateway url")
+	//flag.StringVar(&GatewayUrl, "gateway", "http://172.31.18.190:9000", "gateway url")
+	flag.StringVar(&GatewayUrl, "gateway", "http://192.168.199.130:14700", "gateway url")
 }
 
 func main() {

@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"streamnet-api/common"
+	"github.com/triasteam/streamnet-api/common"
 )
 
 func NewStreamnetService() *server {
@@ -38,8 +38,8 @@ func (serv *server) GetDagMap(ctx context.Context,gateway string) *common.Common
 			length ++
 		}
 	}
-	returnData := [length]map[string]string{}
 	if length > 0 {
+		returnData := make([]map[string]string,length);
 		var index = 0;
 		for k,v := range dagMap {
 			for i := range v{
