@@ -25,6 +25,7 @@ func init() {
 }
 
 func main() {
+	flag.Parse()
 	if GatewayUrl == ""{
 		return;
 	}
