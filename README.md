@@ -1,21 +1,25 @@
+[中文介绍](https://github.com/triasteam/streamnet-api/blob/master/README_cn.md)
 ### Streamnet-Api
-启动方法 
+
+&emsp;&emsp;Streamnet-Api supplies service for Streamnet-Web.Deployed on the Internet server.
+
+
+##### Startup
 
     go build main.go
     ./main -port 7001 -gateway http://gatewayAddr:port
 
-参数说明
-port 启动端口（默认7001）
-gateway 网关地址
+##### Parameter Description
 
-#### 接口说明:
-地址: http://server_address/getDagMap
+    port: application listens(default:7001)
+    gateway: the gateway address(proxy and balance server)
 
-请求方式: GET
+##### API Description:
 
-请求数据: 无
-
-响应数据: 
+Address: http://server_address/getDagMap
+RequestType: GET
+RequestData: none
+ResponseData:
 
     {
       "code": 1,
@@ -40,10 +44,9 @@ gateway 网关地址
       ]
     }
 
-说明
 
-|字段|说明|
+|Param|Desc|
 |----|----|
-|code|状态码1成功，0失败|
-|message|与code对应的消息|
-|data|具体数据|
+|code|1:success，0:fail|
+|message|success message or error infomation|
+|data|data by json string|
