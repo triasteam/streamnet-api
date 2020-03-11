@@ -4,7 +4,7 @@
 启动方法 
 
     go build main.go
-    ./main -port 7001 -gateway http://gatewayAddr:port
+    ./main --port 7001 --gateway http://gatewayAddr:port
 
 参数说明
 port 启动端口（默认7001）

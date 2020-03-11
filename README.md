@@ -7,7 +7,7 @@
 ##### Startup
 
     go build main.go
-    ./main -port 7001 -gateway http://gatewayAddr:port
+    ./main --port 7001 --gateway http://gatewayAddr:port
 
 ##### Parameter Description
 
