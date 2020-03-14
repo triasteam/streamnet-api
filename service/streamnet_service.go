@@ -1,7 +1,6 @@
 package service
 
 import (
-	"fmt"
 	"bytes"
 	"context"
 	"encoding/json"
