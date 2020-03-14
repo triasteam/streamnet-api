@@ -69,7 +69,9 @@ func (serv *server) GetTotalOrder(ctx context.Context,gateway string) *common.Co
 	}
 	var result TotalResponse;
 	err = json.Unmarshal(r,&result);
-	fmt.Println(result);
+	var resp string;
+	resp = result.TotalOrder;
+	fmt.Println(resp);
 	if err != nil {
 		return createSuccessResponse(result);
 	} else {
