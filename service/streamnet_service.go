@@ -64,15 +64,13 @@ func (serv *server) GetDagMap(ctx context.Context,gateway string) *common.Common
 func (serv *server) GetTotalOrder(ctx context.Context,gateway string) *common.CommonResponse {
 	data := "{\"command\":\"getTotalOrder\"}";
 	r, err := doPost(gateway, []byte(data));
-	fmt.Println(r);
 	if err != nil {
 		return createErrorResponse(err);
 	}
 	var result TotalResponse;
 	err = json.Unmarshal(r,&result);
-	fmt.Println(result);
 	if err != nil {
-		return createSuccessResponse(result.TotalOrder);
+		return createSuccessResponse(result);
 	} else {
 		return createErrorResponse(err);
 	}
