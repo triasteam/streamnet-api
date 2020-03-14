@@ -1,6 +1,7 @@
 package service
 
 import (
+	"fmt"
 	"bytes"
 	"context"
 	"encoding/json"
@@ -141,6 +142,7 @@ func doPost(uri string, d []byte) ([]byte, error) {
 
 	defer res.Body.Close()
 	r, err := ioutil.ReadAll(res.Body)
+	fmt.Println(r);
 	if err != nil {
 		return nil, err
 	}
