@@ -58,7 +58,7 @@ func (serv *server) GetDagMap(ctx context.Context,gateway string) *common.Common
 
 }
 
-func (serv *server) getTotalOrder(ctx context.Context,gateway string) *common.CommonResponse {
+func (serv *server) GetTotalOrder(ctx context.Context,gateway string) *common.CommonResponse {
 	data := "{\"command\":\"getTotalOrder\"}";
 	r, err := doPost(gateway, []byte(data));
 	if err != nil {

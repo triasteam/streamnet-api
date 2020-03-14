@@ -19,9 +19,9 @@ func GetDagMap(writer http.ResponseWriter, request *http.Request) {
 	}
 }
 
-func getTotalOrder(writer http.ResponseWriter, request *http.Request) {
+func GetTotalOrder(writer http.ResponseWriter, request *http.Request) {
 	server := st_server.NewStreamnetService()
-	response := server.GetDagMap(nil,GatewayUrl);
+	response := server.GetTotalOrder(nil,GatewayUrl);
 	if err := json.NewEncoder(writer).Encode(response); err != nil {
 		fmt.Println(err)
 	}
@@ -38,7 +38,7 @@ func main() {
 		return;
 	}
 	http.HandleFunc("/getDagMap", GetDagMap);
-	http.HandleFunc("/getTotalOrder", getTotalOrder);
+	http.HandleFunc("/getTotalOrder", GetTotalOrder);
 	fmt.Println("启动端口" + port);
 	err := http.ListenAndServe(":"+port, nil);
 	if err != nil {
