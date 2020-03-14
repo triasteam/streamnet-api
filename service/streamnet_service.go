@@ -20,6 +20,10 @@ type Response struct {
 	Dag string `json:"dag"`
 }
 
+type TotalResponse struct {
+	TotalOrder string `json:"totalOrder"`
+}
+
 func (serv *server) GetDagMap(ctx context.Context,gateway string) *common.CommonResponse {
 	data := "{\"command\":\"getDAG\",\"type\":\"JSON\"}";
 	r, err := doPost(gateway, []byte(data));
@@ -64,7 +68,13 @@ func (serv *server) GetTotalOrder(ctx context.Context,gateway string) *common.Co
 	if err != nil {
 		return createErrorResponse(err);
 	}
-	return createSuccessResponse(r);
+	var result TotalResponse;
+	err = json.Unmarshal(r,&result);
+	if err != nil {
+		return createSuccessResponse(result);
+	} else {
+		return createErrorResponse(err);
+	}
 	// var resultR Response;
 	// err = json.Unmarshal(r, &resultR);
 	// var result Response;
