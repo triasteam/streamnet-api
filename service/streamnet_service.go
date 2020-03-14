@@ -73,7 +73,7 @@ func (serv *server) GetTotalOrder(ctx context.Context,gateway string) *common.Co
 	resp = result.TotalOrder;
 	fmt.Println(resp);
 	if err != nil {
-		return createSuccessResponse(result);
+		return createSuccessResponse(resp);
 	} else {
 		return createErrorResponse(err);
 	}
