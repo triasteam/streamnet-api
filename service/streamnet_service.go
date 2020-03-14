@@ -69,6 +69,7 @@ func (serv *server) GetTotalOrder(ctx context.Context,gateway string) *common.Co
 	}
 	var result TotalResponse;
 	err = json.Unmarshal(r,&result);
+	fmt.Println(result);
 	if err != nil {
 		return createSuccessResponse(result);
 	} else {
@@ -140,7 +141,6 @@ func doPost(uri string, d []byte) ([]byte, error) {
 
 	defer res.Body.Close()
 	r, err := ioutil.ReadAll(res.Body)
-	fmt.Println(r);
 	if err != nil {
 		return nil, err
 	}
