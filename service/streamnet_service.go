@@ -20,14 +20,22 @@ type Response struct {
 	Dag string `json:"dag"`
 }
 
+type TotalResponse struct {
+	TotalOrder string `json:"totalOrder"`
+}
+
+type NodeDetailRequest struct {
+	RequestUrl    string `json:"requestUrl,omitempty"`
+	RequestData   string `json:"requestData,omitempty"`
+	RequestMethod string `json:"requestMethod,omitempty"`
+}
+
 func (serv *server) GetDagMap(ctx context.Context,gateway string) *common.CommonResponse {
 	data := "{\"command\":\"getDAG\",\"type\":\"JSON\"}";
 	r, err := doPost(gateway, []byte(data));
 	if err != nil {
 		return createErrorResponse(err);
 	}
-	var resultR Response;
-	err = json.Unmarshal(r, &resultR);
 	var result Response;
 	err = json.Unmarshal(r, &result);
 	var resultString = result.Dag;
@@ -58,6 +66,26 @@ func (serv *server) GetDagMap(ctx context.Context,gateway string) *common.Common
 
 }
 
+func (serv *server) GetTotalOrder(ctx context.Context,gateway string) *common.CommonResponse {
+	data := "{\"command\":\"getTotalOrder\"}";
+	r, err := doPost(gateway, []byte(data));
+	if err != nil {
+		return createErrorResponse(err);
+	}
+	var result TotalResponse;
+	err = json.Unmarshal(r,&result);
+	return createSuccessResponse(result);
+}
+
+func (serv *server) GetBlockContent(request *NodeDetailRequest,gateway string) *common.CommonResponse {
+	data := request.RequestData;
+	r, err := doPost(gateway, []byte(data));
+	if err != nil {
+		return createErrorResponse(err);
+	}
+	result := string(r);
+	return createSuccessResponse(result);
+}
 
 func createErrorResponse(err error) (*common.CommonResponse) {
 	resp := &common.CommonResponse{
