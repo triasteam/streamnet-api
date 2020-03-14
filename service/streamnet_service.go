@@ -58,6 +58,44 @@ func (serv *server) GetDagMap(ctx context.Context,gateway string) *common.Common
 
 }
 
+func (serv *server) getTotalOrder(ctx context.Context,gateway string) *common.CommonResponse {
+	data := "{\"command\":\"getTotalOrder\"}";
+	r, err := doPost(gateway, []byte(data));
+	if err != nil {
+		return createErrorResponse(err);
+	}
+	return createSuccessResponse(r);
+	// var resultR Response;
+	// err = json.Unmarshal(r, &resultR);
+	// var result Response;
+	// err = json.Unmarshal(r, &result);
+	// var resultString = result.Dag;
+	// var dagMap = map[string][]string{}
+	// err = json.Unmarshal([]byte(resultString),&dagMap);
+	// var length  = 0;
+	// for _,v := range dagMap {
+	// 	for range v{
+	// 		length ++
+	// 	}
+	// }
+	// if length > 0 {
+	// 	returnData := make([]map[string]string,length);
+	// 	var index = 0;
+	// 	for k,v := range dagMap {
+	// 		for i := range v{
+	// 			var unit = make(map[string]string)
+	// 			unit["source"] = k[0:6];
+	// 			unit["target"] = v[i][0:6];
+	// 			returnData[index] = unit;
+	// 			index ++;
+	// 		}
+	// 	}
+	// 	return createSuccessResponse(returnData);
+	// } else {
+	// 	return createErrorResponse(errors.New("No data now"))
+	// }
+
+}
 
 func createErrorResponse(err error) (*common.CommonResponse) {
 	resp := &common.CommonResponse{
