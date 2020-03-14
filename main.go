@@ -27,6 +27,20 @@ func GetTotalOrder(writer http.ResponseWriter, request *http.Request) {
 	}
 }
 
+
+func GetBlockContent(writer http.ResponseWriter, request *http.Request) {
+	server := st_server.NewStreamnetService()
+	var detailRequest *st_server.NodeDetailRequest;
+	if err := json.NewDecoder(request.Body).Decode(&detailRequest); err != nil {
+		fmt.Println(err)
+		request.Body.Close()
+	}
+	response := server.GetBlockContent(detailRequest,GatewayUrl);
+	if err := json.NewEncoder(writer).Encode(response); err != nil {
+		fmt.Println(err)
+	}
+}
+
 func init() {
 	flag.StringVar(&port, "port", "7001", "server port")
 	flag.StringVar(&GatewayUrl, "gateway", "http://172.31.18.190:9000", "gateway url")
@@ -39,6 +53,7 @@ func main() {
 	}
 	http.HandleFunc("/getDagMap", GetDagMap);
 	http.HandleFunc("/getTotalOrder", GetTotalOrder);
+	http.HandleFunc("/getBlockContent", GetBlockContent);
 	fmt.Println("启动端口" + port);
 	err := http.ListenAndServe(":"+port, nil);
 	if err != nil {

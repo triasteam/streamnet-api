@@ -24,6 +24,12 @@ type TotalResponse struct {
 	TotalOrder string `json:"totalOrder"`
 }
 
+type NodeDetailRequest struct {
+	RequestUrl    string `json:"requestUrl,omitempty"`
+	RequestData   string `json:"requestData,omitempty"`
+	RequestMethod string `json:"requestMethod,omitempty"`
+}
+
 func (serv *server) GetDagMap(ctx context.Context,gateway string) *common.CommonResponse {
 	data := "{\"command\":\"getDAG\",\"type\":\"JSON\"}";
 	r, err := doPost(gateway, []byte(data));
@@ -69,37 +75,16 @@ func (serv *server) GetTotalOrder(ctx context.Context,gateway string) *common.Co
 	var result TotalResponse;
 	err = json.Unmarshal(r,&result);
 	return createSuccessResponse(result);
+}
 
-	// var resultR Response;
-	// err = json.Unmarshal(r, &resultR);
-	// var result Response;
-	// err = json.Unmarshal(r, &result);
-	// var resultString = result.Dag;
-	// var dagMap = map[string][]string{}
-	// err = json.Unmarshal([]byte(resultString),&dagMap);
-	// var length  = 0;
-	// for _,v := range dagMap {
-	// 	for range v{
-	// 		length ++
-	// 	}
-	// }
-	// if length > 0 {
-	// 	returnData := make([]map[string]string,length);
-	// 	var index = 0;
-	// 	for k,v := range dagMap {
-	// 		for i := range v{
-	// 			var unit = make(map[string]string)
-	// 			unit["source"] = k[0:6];
-	// 			unit["target"] = v[i][0:6];
-	// 			returnData[index] = unit;
-	// 			index ++;
-	// 		}
-	// 	}
-	// 	return createSuccessResponse(returnData);
-	// } else {
-	// 	return createErrorResponse(errors.New("No data now"))
-	// }
-
+func (serv *server) GetBlockContent(request *NodeDetailRequest,gateway string) *common.CommonResponse {
+	data := request.RequestData;
+	r, err := doPost(gateway, []byte(data));
+	if err != nil {
+		return createErrorResponse(err);
+	}
+	result := string(r);
+	return createSuccessResponse(result);
 }
 
 func createErrorResponse(err error) (*common.CommonResponse) {
