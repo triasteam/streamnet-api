@@ -12,6 +12,9 @@ var port string
 var GatewayUrl string
 
 func GetDagMap(writer http.ResponseWriter, request *http.Request) {
+	writer.Header().Set("Access-Control-Allow-Origin", "*") ;
+	writer.Header().Add("Access-Control-Allow-Headers", "Content-Type");
+	writer.Header().Set("content-type", "application/json");
 	server := st_server.NewStreamnetService()
 	response := server.GetDagMap(nil,GatewayUrl);
 	if err := json.NewEncoder(writer).Encode(response); err != nil {
@@ -20,6 +23,9 @@ func GetDagMap(writer http.ResponseWriter, request *http.Request) {
 }
 
 func GetTotalOrder(writer http.ResponseWriter, request *http.Request) {
+	writer.Header().Set("Access-Control-Allow-Origin", "*") ;
+	writer.Header().Add("Access-Control-Allow-Headers", "Content-Type");
+	writer.Header().Set("content-type", "application/json");
 	server := st_server.NewStreamnetService()
 	response := server.GetTotalOrder(nil,GatewayUrl);
 	if err := json.NewEncoder(writer).Encode(response); err != nil {
@@ -29,6 +35,9 @@ func GetTotalOrder(writer http.ResponseWriter, request *http.Request) {
 
 
 func GetBlockContent(writer http.ResponseWriter, request *http.Request) {
+	writer.Header().Set("Access-Control-Allow-Origin", "*") ;
+	writer.Header().Add("Access-Control-Allow-Headers", "Content-Type");
+	writer.Header().Set("content-type", "application/json");
 	server := st_server.NewStreamnetService()
 	var detailRequest *st_server.NodeDetailRequest;
 	if err := json.NewDecoder(request.Body).Decode(&detailRequest); err != nil {
